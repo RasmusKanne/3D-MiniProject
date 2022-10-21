@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private int cheeseScore = 0;
+    private int mouseHealth = 10;
+
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("CheesePickUp")) {
+            cheeseScore += 1;
+            Destroy(collision.gameObject);
+            Debug.Log(cheeseScore);
+        }
     }
 }
