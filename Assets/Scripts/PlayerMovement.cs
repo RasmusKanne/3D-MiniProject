@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    private Animator animator;
+
     Vector3 moveDirection;
 
     Rigidbody rb;
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         // Finding the players rigidbody component and freezing its rotation
+        animator = GetComponentInChildren(typeof(Animator)) as Animator;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -83,6 +86,14 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
+        if (moveDirection != Vector3.zero)
+        {
+            animator.SetBool("isMoving", true);
+        } else
+        {
+            animator.SetBool("isMoving", false);
+        }
+
         if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
@@ -113,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
 
         // The player character jumps by applying a force to the rigidbody in the upwards direction, using the forcemode impulse because it only happens once
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        animator.SetTrigger("Jump");
     }
 
     private void ResetJump()
