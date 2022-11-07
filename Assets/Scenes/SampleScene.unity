@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 147512493}
   - component: {fileID: 147512496}
   - component: {fileID: 147512495}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightEar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1521,7 +1521,15 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 1596562130}
   - {fileID: 44856914}
-  player: {fileID: 348161413}
+  player: {fileID: 348161412}
+  radius: 20
+  angle: 150
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &323852432
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1647,7 +1655,7 @@ GameObject:
   - component: {fileID: 348161414}
   - component: {fileID: 348161415}
   - component: {fileID: 348161416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2362,7 +2370,7 @@ GameObject:
   - component: {fileID: 437840001}
   - component: {fileID: 437840002}
   - component: {fileID: 437840003}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MouseModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2429,7 +2437,7 @@ GameObject:
   - component: {fileID: 446599203}
   - component: {fileID: 446599205}
   - component: {fileID: 446599204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3508,7 +3516,7 @@ GameObject:
   - component: {fileID: 717797857}
   - component: {fileID: 717797860}
   - component: {fileID: 717797859}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5932,7 +5940,7 @@ GameObject:
   - component: {fileID: 1423052957}
   - component: {fileID: 1423052959}
   - component: {fileID: 1423052958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6015,7 +6023,7 @@ GameObject:
   - component: {fileID: 1439398366}
   - component: {fileID: 1439398369}
   - component: {fileID: 1439398368}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftEar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6389,7 +6397,7 @@ GameObject:
   - component: {fileID: 1503349138}
   - component: {fileID: 1503349137}
   - component: {fileID: 1503349136}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6536,7 +6544,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516278623}
-  m_LocalRotation: {x: 0.22975291, y: -0.000000018722702, z: 0.00000000441983, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: 0.000000018722702, z: -0.00000000441983, w: 0.973249}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7445,7 +7453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1697218625}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8247,7 +8255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960781143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8478,7 +8486,7 @@ GameObject:
   - component: {fileID: 1986184171}
   - component: {fileID: 1986184174}
   - component: {fileID: 1986184173}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
