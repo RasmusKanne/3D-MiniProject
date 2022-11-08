@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // Implementing a groundcheck using raycast that detects if the player is on the ground
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, groundMask);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f);
         
         PlayerInput();
         SpeedControl();
