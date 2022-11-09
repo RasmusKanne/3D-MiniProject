@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float moveSpeed;
+    private float originalMoveSpeed;
 
     public Transform orientation;
 
@@ -37,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren(typeof(Animator)) as Animator;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        originalMoveSpeed = moveSpeed;
     }
 
     private void Update()
@@ -78,6 +81,16 @@ public class PlayerMovement : MonoBehaviour
             // Using invoke it can queue a jump to happen right when it is able to, making it more responsive to the players input
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && grounded)
+        {
+            moveSpeed = moveSpeed * 2f;
+        }
+        else
+        {
+            moveSpeed = originalMoveSpeed;
+        }
+
     }
 
     // MovePlayer function takes the player input from the PlayerInput function and creates a movement vector based upon the orientation of the player

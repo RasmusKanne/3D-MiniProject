@@ -26,30 +26,33 @@ public class PatrollingEnemy : MonoBehaviour
 
     private void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>(); // Finds the Objects NavMeshAgent
     }
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
+        // Gets the enemy to initially go to the first patrol point, then starts the FOV Routine
         UpdateDestination();
         StartCoroutine(FOVRoutine());
     }
 
     void Update()
     {
+        // Gets the enemy to detect if the current targeted patrolpoint object is close and makes it change to the next patrol point
         if (Vector3.Distance(transform.position, patrolPointDistance) < 10)
         {
             ChangePatrolPointID();
             UpdateDestination();
         }
 
+        // Makes the enemy attack the player if it is within range and is able to have a clean view of the player
         if (Vector3.Distance(transform.position, player.transform.position) < attackRange && canSeePlayer)
         {
             navMeshAgent.destination = player.transform.position;
         }
-        else
+        else // If the player gets out of sight of the enemy it changes its destination back to the current patrol point it was chasing before attacking
         {
             UpdateDestination();
         }
@@ -84,22 +87,25 @@ public class PatrollingEnemy : MonoBehaviour
         }
     }
 
+    // Checks if the enemy is able to see the player using spherecast as the field of view, while checking for obstructions using a raycast to the player
     private void FieldOfViewCheck()
     {
-        // Checks if the enemy is able to see the player using spherecast as the field of view, while checking for obstructions using a raycast to the player
+        // Creates an array of colliders which contains all colliders within the overlapping sphere and belongs to the playerMask layermask
         Collider[] inViewColliders = Physics.OverlapSphere(transform.position, radius, playerMask);
 
         if (inViewColliders.Length != 0)
         {
-            // Debug.Log("I Found The Player");
+            // If the player is found, it gets the players transform and creates a direction vector from the enemy to the player
             Transform target = inViewColliders[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
+            // Then it checks how big the angle between the direction vector and the enemy's forward vector is and continues if the angle is less than the set FOV angle
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
             {
-                // Debug.Log("I See The Player");
+                // Finds the distance from the enemy and the player
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
+                // Then casts a RayCast from the enemy to the player and checks if it is not hitting an obstruction, then it set a bool to true else it is set to false
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                 {
                     canSeePlayer = true;

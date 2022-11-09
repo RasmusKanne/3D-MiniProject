@@ -20,19 +20,28 @@ public class PlayerStats : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        // Sets UI to sync with variables in this script and initializes currenthealth to be equal to maxhealth
         currentHealth = maxHealth;
         uiController.SetMaxHealth(maxHealth);
         uiController.SetCheese(cheeseScore, winCondition);
     }
 
+    // Within the OnCollisionEnter function all the players interactions are with the world is run based on what type of tag the collided object has
     private void OnCollisionEnter(Collision collision)
     {
+        // Checks if the object is a cheese, then it increases the cheesescore int and destroys the object
+        // Afterwards it sync the new score with the UI, and hides the introduction text after taking the two cheeses at the beginning
         if (collision.gameObject.CompareTag("CheesePickUp")) {
             cheeseScore += 1;
             Destroy(collision.gameObject);
             uiController.SetCheese(cheeseScore, winCondition);
+            if (cheeseScore == 2)
+            {
+                uiController.HideIntro();
+            }
         }
         
+        // Checks for the amount of cheeses and if it is enough the player wins when going into the mousehole
         if (collision.gameObject.CompareTag("MouseHole") && cheeseScore >= winCondition) {
             uiController.Victory();
         }
@@ -40,24 +49,27 @@ public class PlayerStats : MonoBehaviour
             Debug.Log($"You need at least {winCondition} cheeses to Win");
         }
 
+        // When the enemy objects collides with the player:
         if (collision.gameObject.CompareTag("Enemy") && Invulnerable == false) {
-            currentHealth -= 1;
+            currentHealth -= 1; // the player loses a life
 
-            uiController.SetHealth(currentHealth);
+            uiController.SetHealth(currentHealth); // Healthbar is updated
 
+            // The player is knocked back from the enemy
             Vector3 difference = collision.transform.position - transform.position;
             difference = difference.normalized * knockback;
             rb.AddForce(difference, ForceMode.Impulse);
 
-            StartCoroutine(InvincibilityFrames());
+            StartCoroutine(InvincibilityFrames()); // Avoids the player from colliding multiple times with the same enemy
 
             if (currentHealth <= 0)
             {
-                uiController.Defeat();
+                uiController.Defeat(); // The player loses when life gets to 0
             }
         }
     }
 
+    // Uses the IEnumerator to make the program wait 3 seconds before making the player vulnerable again
     IEnumerator InvincibilityFrames()
     {
         Invulnerable = true;
