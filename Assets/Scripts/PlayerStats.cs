@@ -26,6 +26,14 @@ public class PlayerStats : MonoBehaviour
         uiController.SetCheese(cheeseScore, winCondition);
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            uiController.Pause();
+        }
+    }
+
     // Within the OnCollisionEnter function all the players interactions are with the world is run based on what type of tag the collided object has
     private void OnCollisionEnter(Collision collision)
     {

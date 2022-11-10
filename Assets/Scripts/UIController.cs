@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cheese;
     [SerializeField] private GameObject defeatScreen;
     [SerializeField] private GameObject victoryScreen;
+    [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject IntroScreen;
 
     public void SetMaxHealth(int health) // Initially sets the maxhealth on the health bar
@@ -31,6 +32,22 @@ public class UIController : MonoBehaviour
     public void SetCheese(int cheeseAmount, int winCondition) // Updates the cheese counter in the UI
     {
         cheese.text = $"{cheeseAmount} / {winCondition}";
+    }
+
+    public void Pause() // Opens pause menu when player presses esc in playerstats script
+    {
+        pauseScreen.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void Continue() // Used to unpause when in pause menu
+    {
+        pauseScreen.SetActive(false);
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Defeat() // Is called when the player loses, which stops the game and show an overlay with retry and exit buttons
